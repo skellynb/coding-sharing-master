@@ -1,0 +1,25 @@
+*.env
+
+*.fig
+*.xd
+
+.DS_Store
+.prettierignore
+
+# dependencies
+node_modules
+.env
+
+# build
+.next
+dist
+
+# logs
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# system
+.DS_Store
+
+
