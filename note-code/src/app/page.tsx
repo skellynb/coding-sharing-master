@@ -10,6 +10,9 @@ import { html } from '@codemirror/lang-html';
 import { javascript } from '@codemirror/lang-javascript';
 import { css } from '@codemirror/lang-css';
 import { Extension } from '@uiw/react-codemirror';
+import Image from 'next/image';
+
+
 
 export default function HomePage() {
   const [code, setCode] = useState(defaultSnippets['html']);
@@ -40,15 +43,32 @@ export default function HomePage() {
   css: css(),
 };
 
+return (
+    
+    <main className="relative  w-full
+    bg-[#7E48E6]
+    p-4 flex flex-col items-center">
 
-  return (
-    <main className="min-h-screen bg-[url('/Hero-Background-notecode.svg')] bg-cover bg-center bg-no-repeat p-4 flex flex-col items-center">
+<div className="absolute top-0 left-0 w-full h-[500px] z-0">
+  <Image
+    src="/Hero-Background-notecode@2x.png" 
+    alt="Hero Background"
+    fill
+    className="object-cover"
+    priority
+  />
+</div>
+      
+
+
+     <div className="relative z-10">
       <h1 className="text-3xl font-bold text-center mb-4">
         Create & Share <br />
         <span className="text-indigo-600">Your Code easily</span>
       </h1>
+      </div>
 
-      <div className="w-full max-w-5xl bg-white shadow-xl rounded-xl p-4 relative">
+      <div className="w-full max-w-3xl bg-white shadow-xl rounded-xl p-4 relative">
         <div className="flex gap-4 mb-4">
           <select
             className="border p-2 rounded"
@@ -91,5 +111,6 @@ export default function HomePage() {
         </button>
       </div>
     </main>
+    
   );
 }
