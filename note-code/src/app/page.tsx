@@ -58,6 +58,18 @@ return (
     priority
   />
 </div>
+
+    {/* Logo and brand name */}
+<div className="relative z-10 flex items-center gap-2 mb-4">
+  <Image
+    src="/NoteCodeLogo.svg"
+    alt="Notecode Logo"
+    width={100}
+    height={100}
+  />
+  
+</div>
+
       
 
 
