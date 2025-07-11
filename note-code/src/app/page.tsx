@@ -80,7 +80,10 @@ return (
       </h1>
       </div>
 
+      {/* Language + Theme dropdowns */}
       <div className="w-full max-w-3xl bg-white shadow-xl rounded-xl p-4 relative">
+    
+
         <div className="flex gap-4 mb-4">
           <select
             className="border p-2 rounded"
@@ -117,9 +120,15 @@ return (
         <button
           onClick={handleShare}
           disabled={shared}
-          className="mt-4 ml-auto flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
+          className="mt-4 ml-auto flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 disabled:opacity-50"
         >
-          🔗 Share
+          <Image
+    src="/share.svg"
+    alt="Share icon"
+    width={20}
+    height={20}
+  />
+          Share
         </button>
       </div>
     </main>
