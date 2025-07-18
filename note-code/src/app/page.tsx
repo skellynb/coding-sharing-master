@@ -199,6 +199,7 @@ export default function HomePage() {
         />
 
         {/* Share Button */}
+        <div className="flex justify-end mt-4">
         <button
           onClick={handleShare}
           disabled={shareDisabled}
@@ -211,6 +212,7 @@ export default function HomePage() {
           <Image src="/share.svg" alt="Share icon" width={20} height={20} />
           Share
         </button>
+        </div>
 
         {/* Shared URL + Copy */}
         {sharedId && (
