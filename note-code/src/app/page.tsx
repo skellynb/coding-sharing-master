@@ -26,10 +26,8 @@ export default function HomePage() {
   useEffect(() => {
     const mainView = mainEditorRef.current?.view;
     const miniView = minimapRef.current?.view;
-
     const main = mainView?.scrollDOM;
     const mini = miniView?.scrollDOM;
-
     if (!main || !mini) return;
 
     let isSyncingFromMain = false;
@@ -77,7 +75,6 @@ export default function HomePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code, language, theme }),
       });
-
       const data = await res.json();
       setSharedId(data.id);
       setShareDisabled(true);
@@ -101,7 +98,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="relative w-full bg-[#7E48E6] p-4 flex flex-col items-center">
+    <main className="relative w-full bg-[#7E48E6] px-4 sm:px-6 md:px-10 py-6 flex flex-col items-center">
       {/* Background */}
       <div className="absolute top-0 left-0 w-full h-[500px] z-0">
         <Image
@@ -118,14 +115,14 @@ export default function HomePage() {
         <Image
           src="/NoteCodeLogo.svg"
           alt="Notecode Logo"
-          width={100}
-          height={100}
+          width={80}
+          height={80}
         />
       </div>
 
       {/* Heading */}
-      <div className="relative z-10">
-        <h1 className="text-3xl font-bold text-center mb-4">
+      <div className="relative z-10 px-2 text-center">
+        <h1 className="text-2xl sm:text-3xl font-bold mb-4">
           Create & Share <br />
           <span className="text-indigo-600">Your Code easily</span>
         </h1>
@@ -133,15 +130,15 @@ export default function HomePage() {
 
       {/* Editor Card */}
       <div className="w-full max-w-3xl bg-white shadow-xl rounded-xl p-4 relative">
-        {/* Minimap */}
-        <div className="absolute top-4 right-4 w-28 h-40 overflow-hidden z-10 border border-gray-300 rounded">
+        {/* Minimap - hidden on small screens */}
+        <div className="hidden sm:block absolute top-4 right-4 w-28 h-40 overflow-hidden z-10 border border-gray-300 rounded">
           <CodeMirror
             ref={minimapRef}
             value={code}
             height="100%"
             theme={theme === 'dark' ? dracula : eclipse}
             extensions={[languageExtensions[language]]}
-            readOnly={true}
+            readOnly
             basicSetup={{
               lineNumbers: false,
               highlightActiveLine: false,
@@ -158,9 +155,9 @@ export default function HomePage() {
         </div>
 
         {/* Dropdowns */}
-        <div className="flex gap-4 mb-4">
+        <div className="flex flex-col sm:flex-row gap-4 mb-4">
           <select
-            className="border p-2 rounded"
+            className="border-2 border-blue-600 p-2 rounded w-40"
             value={language}
             onChange={(e) => {
               setLanguage(e.target.value);
@@ -174,7 +171,7 @@ export default function HomePage() {
           </select>
 
           <select
-            className="border p-2 rounded"
+            className="border-2 border-blue-600 p-2 rounded w-40"
             value={theme}
             onChange={(e) => {
               setTheme(e.target.value);
@@ -187,7 +184,7 @@ export default function HomePage() {
           </select>
         </div>
 
-        {/* Main Editor */}
+        {/* Code Editor */}
         <CodeMirror
           ref={mainEditorRef}
           value={code}
@@ -205,7 +202,7 @@ export default function HomePage() {
         <button
           onClick={handleShare}
           disabled={shareDisabled}
-          className={`mt-4 flex items-center gap-2 px-4 py-2 rounded text-white ${
+          className={`mt-4 flex items-center justify-center gap-2 px-4 py-2 w-full sm:w-auto rounded text-white ${
             shareDisabled
               ? 'bg-gray-400 cursor-not-allowed'
               : 'bg-blue-600 hover:bg-blue-700'
@@ -217,13 +214,13 @@ export default function HomePage() {
 
         {/* Shared URL + Copy */}
         {sharedId && (
-          <div className="mt-4 bg-gray-100 p-2 rounded flex items-center justify-between">
+          <div className="mt-4 bg-gray-100 p-2 rounded flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
             <code className="text-sm break-all">
               {`${window.location.origin}/snippet/${sharedId}`}
             </code>
             <button
               onClick={handleCopy}
-              className="ml-4 text-blue-600 hover:underline text-sm"
+              className="text-blue-600 hover:underline text-sm"
             >
               {copied ? 'Copied!' : 'Copy'}
             </button>
