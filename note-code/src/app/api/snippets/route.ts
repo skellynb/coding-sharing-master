@@ -1,5 +1,5 @@
 // Import Prisma Client to interact with your PostgreSQL database
-import { PrismaClient } from "../../../../generated/prisma";
+import { PrismaClient } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as uuidv4 } from "uuid";
 
