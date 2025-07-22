@@ -5,9 +5,9 @@ const prisma = new PrismaClient();
 
 export async function GET(
   req: NextRequest,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
-  const { id } = context.params;
+  const { id } = params;
 
   try {
     const snippet = await prisma.snippet.findUnique({
@@ -24,12 +24,7 @@ export async function GET(
       return NextResponse.json({ error: "Snippet not found" }, { status: 404 });
     }
 
-    return NextResponse.json({
-      code: snippet.code,
-      language: snippet.language,
-      theme: snippet.theme,
-      createdAt: snippet.createdAt,
-    });
+    return NextResponse.json(snippet);
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
