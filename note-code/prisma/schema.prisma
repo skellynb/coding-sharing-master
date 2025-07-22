@@ -1,18 +1,19 @@
+
 generator client {
   provider = "prisma-client-js"
-  
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
+        
 
-
-model snippet {
-  id        String   @id @default(cuid())
-  code      String
-  language  String
-  theme     String
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
   createdAt DateTime @default(now())
 }
+
