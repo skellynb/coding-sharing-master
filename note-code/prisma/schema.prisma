@@ -10,10 +10,9 @@ datasource db {
 }
         
 
-model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
+model Snippet {
+  id    String @id @default(uuid())
+  code  String
+   language String
+  theme    String
 }
-
