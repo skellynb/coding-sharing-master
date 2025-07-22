@@ -15,4 +15,5 @@ model Snippet {
   code  String
    language String
   theme    String
+  createdAt DateTime @default(now())
 }

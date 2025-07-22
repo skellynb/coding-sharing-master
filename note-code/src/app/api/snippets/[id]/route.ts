@@ -12,7 +12,13 @@ export async function GET (
 
   try {
     const snippet = await prisma.snippet.findUnique({
-      where: {id}
+      where: {id},
+      select: {
+    code: true,
+    language: true,
+    theme: true,
+    createdAt: true, // ✅ explicitly include this
+  }
     });
 
     if (!snippet) {
