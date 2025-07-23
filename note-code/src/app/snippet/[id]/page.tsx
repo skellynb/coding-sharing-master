@@ -1,7 +1,6 @@
 // app/snippet/[id]/page.tsx
 'use client';
 
-
 import CodeMirror from "@uiw/react-codemirror";
 import { dracula } from "@uiw/codemirror-theme-dracula";
 import { eclipse } from "@uiw/codemirror-theme-eclipse";
@@ -41,20 +40,30 @@ type Snippet = {
   createdAt: string;
 };
 
-
-export default function SnippetPage({ params }: { params: { id: string } }) {
+export default function SnippetPage({ params }: { params: Promise<{ id: string }> }) {
   const [snippet, setSnippet] = useState<Snippet | null>(null);
   const [error, setError] = useState(false);
+  const [id, setId] = useState<string | null>(null);
 
+  // Resolve params first
   useEffect(() => {
-    fetch(`/api/snippets/${params.id}`)
+    params.then((resolvedParams) => {
+      setId(resolvedParams.id);
+    });
+  }, [params]);
+
+  // Fetch snippet once we have the id
+  useEffect(() => {
+    if (!id) return;
+    
+    fetch(`/api/snippets/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Not found");
         return res.json();
       })
       .then(setSnippet)
       .catch(() => setError(true));
-  }, [params.id]);
+  }, [id]);
 
   if (error) return <div className="p-10 text-red-500">Snippet not found.</div>;
   if (!snippet) return <div className="p-10">Loading...</div>;
