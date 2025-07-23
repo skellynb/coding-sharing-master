@@ -193,6 +193,7 @@ export default function HomePage() {
 
         {/* Code Editor */}
         <div className="mb-6 border-2 border-gray-200 rounded-lg overflow-hidden">
+            <div className="w-full overflow-x-auto">
           <CodeMirror
             ref={mainEditorRef}
             value={code}
@@ -206,6 +207,7 @@ export default function HomePage() {
               setShareDisabled(false);
             }}
           />
+        </div>
         </div>
 
         {/* Share Button */}
@@ -236,7 +238,7 @@ export default function HomePage() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-green-800 mb-1">Share this link:</p>
-                <code className="text-sm text-green-700 break-all bg-white px-2 py-1 rounded border">
+                <code className="text-sm text-black break-words bg-white px-2 py-1 rounded border block w-full">
                   {`${window.location.origin}/snippet/${sharedId}`}
                 </code>
               </div>
